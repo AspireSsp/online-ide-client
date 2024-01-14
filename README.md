@@ -5,14 +5,14 @@ Unleash your coding prowess as you write and run code seamlessly in our innovati
 
 Here's what makes us stand out:
 
-`💡 Effortless Coding:` Write, test, and refine your code effortlessly in our intuitive IDE.
-`📁 Code Preservation:`Your code is precious. Save it securely and access it whenever you need it.
-`🔗 Shareable Links:` Generate a special link to share your genius with friends, colleagues, or the entire world!
-🌈 User-Friendly Interface: A sleek design ensures a seamless and enjoyable coding experience.
-`🚀 Fast and Efficient:` Our platform ensures speedy code execution, letting you focus on what matters – your code!
-`<>👨‍💻 Happy Coding:` Embrace the joy of coding with our state-of-the-art features and user-friendly interface. Your coding journey just got a whole lot brighter! 👨‍💻</>
+`💡 Effortless Coding:` Write, test, and refine your code effortlessly in our intuitive IDE. \
+`📁 Code Preservation:`Your code is precious. Save it securely and access it whenever you need it. \
+`🔗 Shareable Links:` Generate a special link to share your genius with friends, colleagues, or the entire world! \
+`🌈 User-Friendly Interface:` A sleek design ensures a seamless and enjoyable coding experience. \
+`🚀 Fast and Efficient:` Our platform ensures speedy code execution, letting you focus on what matters – your code! \
+`<>👨‍💻 Happy Coding:` Embrace the joy of coding with our state-of-the-art features and user-friendly interface. Your coding journey just got a whole lot brighter! 👨‍💻</> \
 Join us on this exciting coding adventure and experience coding like never before! 🚀
-
+### `Depoloyed Links Coming Soon...`
 
 # Getting Started with Create React App
 
