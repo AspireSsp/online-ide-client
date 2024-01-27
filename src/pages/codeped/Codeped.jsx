@@ -1,12 +1,12 @@
 import React from 'react'
-import Files from '../component/Files'
-import CodeEditer from '../component/CodeEditer'
-import Output from '../component/Output'
-import TabFiles from '../component/TabFiles'
-import YourFiles from '../component/YourFiles'
+import Files from '../../component/Files'
+import CodeEditer from '../../component/CodeEditer'
+import Output from '../../component/Output'
+import TabFiles from '../../component/TabFiles'
+import YourFiles from '../../component/YourFiles'
 import { useSelector } from 'react-redux'
 import { Button } from '@chakra-ui/react'
-import AddModel from '../component/AddModel'
+import AddModel from '../../component/AddModel'
 
 
 const Codeped = () => {

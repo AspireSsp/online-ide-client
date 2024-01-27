@@ -12,9 +12,6 @@ const YourFiles = () => {
             </Box>
             <Spacer />
             <Box >
-                {/* <Button pt={0} m={0} variant='gost'>
-                    <AddIcon />
-                </Button> */}
                 <AddModel />
             </Box>
         </Flex>

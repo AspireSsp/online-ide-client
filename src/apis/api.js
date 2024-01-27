@@ -13,7 +13,7 @@ export const post = async (url, data) => {
         return { statusCode: res.status, data: res.data };
     }
     catch (error) {
-        console.log(error)
+        // console.log(error)
         throw error
     }
 }

@@ -3,13 +3,18 @@
 import {
   Avatar,
   Box,
+  Button,
   chakra,
   Container,
+  createIcon,
   Flex,
+  Heading,
   Icon,
-  SimpleGrid,
+  Stack,
+  Text,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { FaMailBulk } from 'react-icons/fa'
 
 const testimonials = [
   {
@@ -115,7 +120,7 @@ function TestimonialCard(props) {
   )
 }
 
-export default function GridBlurredBackdrop() {
+export default function Contribute() {
   return (
     <Flex
       textAlign={'center'}
@@ -139,7 +144,7 @@ export default function GridBlurredBackdrop() {
           fontFamily={'Work Sans'}
           fontWeight={'bold'}
           color={useColorModeValue('gray.700', 'gray.50')}>
-          You&apos;re in good company
+          How to Contribute !!
         </chakra.h1>
         <chakra.h2
           margin={'auto'}
@@ -147,26 +152,87 @@ export default function GridBlurredBackdrop() {
           fontFamily={'Inter'}
           fontWeight={'medium'}
           color={useColorModeValue('gray.500', 'gray.400')}>
-          See why over{' '}
-          <chakra.strong color={useColorModeValue('gray.700', 'gray.50')}>
-            150,000+
-          </chakra.strong>{' '}
-          influencers use EEZY to manage their social media content!
+          Below you get the proper documentation to add your feature to app and Make it live!!
         </chakra.h2>
       </Box>
-      <SimpleGrid columns={{ base: 1, xl: 2 }} spacing={'20'} mt={16} mb={16} mx={'auto'}>
+      <Container maxW={'3xl'}>
+        <Stack
+          as={Box}
+          textAlign={'center'}
+          spacing={{ base: 8, md: 14 }}
+          py={{ base: 20, md: 36 }}>
+          <Text color={'gray.500'}>
+            I am reaching out to inform you about an exciting opportunity to contribute to our project.
+          </Text>
+          <Text color={'gray.500'}>
+              We believe that your unique skills and expertise could greatly enhance the success of our project.
+          </Text>
+          <Text color={'gray.500'}>
+              If you are interested in contributing or would like more information, please feel free to send an email to sanjayprajapat68149@gmail.com. We welcome contributors from all backgrounds and levels of experience.
+          </Text>
+          <Text color={'gray.500'}>
+              Thank you for considering this opportunity, and we look forward to potentially working together!
+          </Text>
+          <Stack
+            direction={'column'}
+            spacing={3}
+            align={'center'}
+            alignSelf={'center'}
+            position={'relative'}>
+            <Button
+              colorScheme={'green'}
+              bg={'green.400'}
+              rounded={'full'}
+              px={6}
+              _hover={{
+                bg: 'green.500',
+              }}>
+              Get Started
+            </Button>
+            <Button variant={'link'} colorScheme={'blue'} size={'sm'}>
+              Learn more
+            </Button>
+            <Box>
+              <Icon
+                as={Arrow}
+                color={useColorModeValue('gray.800', 'gray.300')}
+                w={71}
+                position={'absolute'}
+                right={-71}
+                top={'10px'}
+              />
+              <Text
+                fontSize={'lg'}
+                fontFamily={'Caveat'}
+                position={'absolute'}
+                right={'-125px'}
+                top={'-15px'}
+                transform={'rotate(10deg)'}>
+                just a mail away
+              </Text>
+            </Box>
+          </Stack>
+        </Stack>
+      </Container>
+
+      {/* <SimpleGrid columns={{ base: 1, xl: 2 }} spacing={'20'} mt={16} mb={16} mx={'auto'}>
         {testimonials.map((cardInfo, index) => (
           <TestimonialCard key={index} {...cardInfo} index={index} />
         ))}
-      </SimpleGrid>
-      <Box>
-        <Icon viewBox="0 0 40 35" mt={14} boxSize={10} color={'purple.400'}>
-          <path
-            fill={'currentColor'}
-            d="M10.7964 5.04553e-07C8.66112 -0.000123335 6.57374 0.632971 4.79827 1.81922C3.0228 3.00547 1.63898 4.69158 0.82182 6.66433C0.00466116 8.63708 -0.209132 10.8079 0.207477 12.9021C0.624087 14.9964 1.65239 16.9201 3.16233 18.4299L19.1153 34.3828C19.2395 34.5074 19.3871 34.6062 19.5496 34.6736C19.7121 34.741 19.8863 34.7757 20.0622 34.7757C20.2381 34.7757 20.4123 34.741 20.5748 34.6736C20.7373 34.6062 20.8848 34.5074 21.0091 34.3828L36.962 18.4272C38.9319 16.3917 40.0228 13.6636 39.9996 10.8311C39.9764 7.99858 38.8409 5.28867 36.838 3.28573C34.835 1.28279 32.1251 0.147283 29.2926 0.124081C26.4601 0.100879 23.732 1.19184 21.6965 3.1617L20.0622 4.79337L18.4305 3.1617C17.4276 2.15892 16.237 1.36356 14.9267 0.821064C13.6163 0.278568 12.2119 -0.000433066 10.7937 5.04553e-07H10.7964Z"
-          />
-        </Icon>
-      </Box>
+      </SimpleGrid> */}
+
     </Flex>
-  )
+)
 }
+const Arrow = createIcon({
+  displayName: 'Arrow',
+  viewBox: '0 0 72 24',
+  path: (
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M0.600904 7.08166C0.764293 6.8879 1.01492 6.79004 1.26654 6.82177C2.83216 7.01918 5.20326 7.24581 7.54543 7.23964C9.92491 7.23338 12.1351 6.98464 13.4704 6.32142C13.84 6.13785 14.2885 6.28805 14.4722 6.65692C14.6559 7.02578 14.5052 7.47362 14.1356 7.6572C12.4625 8.48822 9.94063 8.72541 7.54852 8.7317C5.67514 8.73663 3.79547 8.5985 2.29921 8.44247C2.80955 9.59638 3.50943 10.6396 4.24665 11.7384C4.39435 11.9585 4.54354 12.1809 4.69301 12.4068C5.79543 14.0733 6.88128 15.8995 7.1179 18.2636C7.15893 18.6735 6.85928 19.0393 6.4486 19.0805C6.03792 19.1217 5.67174 18.8227 5.6307 18.4128C5.43271 16.4346 4.52957 14.868 3.4457 13.2296C3.3058 13.0181 3.16221 12.8046 3.01684 12.5885C2.05899 11.1646 1.02372 9.62564 0.457909 7.78069C0.383671 7.53862 0.437515 7.27541 0.600904 7.08166ZM5.52039 10.2248C5.77662 9.90161 6.24663 9.84687 6.57018 10.1025C16.4834 17.9344 29.9158 22.4064 42.0781 21.4773C54.1988 20.5514 65.0339 14.2748 69.9746 0.584299C70.1145 0.196597 70.5427 -0.0046455 70.931 0.134813C71.3193 0.274276 71.5206 0.70162 71.3807 1.08932C66.2105 15.4159 54.8056 22.0014 42.1913 22.965C29.6185 23.9254 15.8207 19.3142 5.64226 11.2727C5.31871 11.0171 5.26415 10.5479 5.52039 10.2248Z"
+      fill="currentColor"
+    />
+  ),
+})

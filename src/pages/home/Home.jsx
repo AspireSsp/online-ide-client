@@ -1,5 +1,5 @@
 import React from 'react'
-import SplitScreen from '../component/ScreenWithImage'
+import SplitScreen from '../../component/ScreenWithImage'
 
 const Home = () => {
   return (

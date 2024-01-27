@@ -1,3 +1,15 @@
+.tabs {
+  max-width: 600px;
+  overflow-x: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.tabs::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+
 /*
 .App {
   text-align: center;

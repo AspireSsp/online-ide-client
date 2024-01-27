@@ -13,7 +13,7 @@ const ActiveFiles = () => {
         dispatch(closeFile(file))
     }
     return (
-        <div style={{width:'100%'}}>
+        <div className='tabs' style={{width:'100%'}}>
             <Flex boxShadow={"0 2px 3px -1px rgba(0, 0, 0, 0.5)"} w={"100%"}>
                 {
                     files?.map((file, index)=>(

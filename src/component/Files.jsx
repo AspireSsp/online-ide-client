@@ -69,8 +69,6 @@ const Files = () => {
                 </AccordionItem>
             ))
         }
-
-           
         </Accordion>
     </div>
   )

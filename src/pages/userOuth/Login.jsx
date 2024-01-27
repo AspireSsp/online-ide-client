@@ -17,8 +17,8 @@ import {
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { loginUser } from '../../features/authSlice'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { loginUser } from '../../features/user/authSlice'
 
 const Login = () => {
     const navigate = useNavigate();
@@ -62,6 +62,11 @@ const Login = () => {
                             <Text color={'blue.500'}>Forgot password?</Text>
                         </Stack>
                         <Button colorScheme={'blue'} variant={'solid'} onClick={()=>handleSignIn()}>Sign in</Button>
+                    </Stack>
+                    <Stack pt={6}>
+                        <Text align={'center'}>
+                            New user? <Link to='/sign-up' color={'blue.400'}>Sign Up</Link>
+                        </Text>
                     </Stack>
                 </Stack>
             </Flex>

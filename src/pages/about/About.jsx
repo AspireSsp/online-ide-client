@@ -1,4 +1,3 @@
-
 import {
   Container,
   SimpleGrid,
@@ -27,7 +26,7 @@ const Feature = ({ text, icon, iconBg }) => {
   )
 }
 
-export default function SplitWithImage() {
+export default function About() {
   return (
     <Container maxW={'5xl'} py={12}>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
@@ -43,10 +42,10 @@ export default function SplitWithImage() {
             rounded={'md'}>
             Our Story
           </Text>
-          <Heading>A digital Product design agency</Heading>
+          <Heading>Hello</Heading>
+          <Heading>I am <span style={{color:'#3182ce'}}>SANJAY PRAJAPAT</span></Heading>
           <Text color={'gray.500'} fontSize={'lg'}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-            eirmod tempor invidunt ut labore
+          Experienced Full Stack Developer specializing in building robust and scalable web and mobile applications. With a passion for problem-solving and a strong background in MERN stack (MongoDB, Express.js, React.js, Node.js), React Native, Flutter, AWS, and Firebase, I strive to create innovative solutions that meet the needs of clients and users.
           </Text>
           <Stack
             spacing={4}
@@ -56,17 +55,17 @@ export default function SplitWithImage() {
             <Feature
               icon={<Icon as={IoAnalyticsSharp} color={'yellow.500'} w={5} h={5} />}
               iconBg={useColorModeValue('yellow.100', 'yellow.900')}
-              text={'Business Planning'}
+              text={'Website Development'}
             />
             <Feature
               icon={<Icon as={IoLogoBitcoin} color={'green.500'} w={5} h={5} />}
               iconBg={useColorModeValue('green.100', 'green.900')}
-              text={'Financial Planning'}
+              text={'Mobile Application Development'}
             />
             <Feature
               icon={<Icon as={IoSearchSharp} color={'purple.500'} w={5} h={5} />}
               iconBg={useColorModeValue('purple.100', 'purple.900')}
-              text={'Market Analysis'}
+              text={'Full stack Development'}
             />
           </Stack>
         </Stack>

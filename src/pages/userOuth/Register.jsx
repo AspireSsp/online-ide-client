@@ -18,8 +18,8 @@ import {
 import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { Link, useNavigate } from 'react-router-dom'
-import { signupUser } from '../../features/authSlice'
 import { useDispatch } from 'react-redux'
+import { signupUser } from '../../features/user/authSlice'
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);

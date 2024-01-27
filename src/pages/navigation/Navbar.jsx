@@ -5,7 +5,7 @@ import { Link, Outlet, useNavigate } from 'react-router-dom'
 import Footer from '../../component/Footer'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getUser, logoutUser } from '../../features/authSlice'
+import { getUser, logoutUser } from '../../features/user/authSlice'
 
 const Links = [
     {

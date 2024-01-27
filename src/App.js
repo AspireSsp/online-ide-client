@@ -3,10 +3,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './pages/userOuth/Login';
 import Register from './pages/userOuth/Register';
 import Navbar from './pages/navigation/Navbar';
-import Home from './pages/Home';
-import Codeped from './pages/Codeped';
-import About from './pages/About';
-import Contribute from './pages/Contribute';
+import ErrorPage from './pages/Error/ErrorPage';
+import Codeped from './pages/codeped/Codeped';
+import Home from './pages/home/Home';
+import About from './pages/about/About';
+import Contribute from './pages/contribute/Contribute';
 
 
 
@@ -25,6 +26,7 @@ function App() {
           </Route>
           <Route path='/login' element={<Login />}/>
           <Route path='/sign-up' element={<Register />}/>
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </div>
