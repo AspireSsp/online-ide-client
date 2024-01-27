@@ -14,8 +14,23 @@ import {
 } from '@chakra-ui/react'
 
 import React from 'react'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../../features/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const handleSignIn = async()=>{
+        const login = await dispatch(loginUser({email, password}));
+        if(login.type === 'login/fulfilled'){
+            navigate('/')
+        }
+    }
+
   return (
     <div>
         <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
@@ -24,18 +39,18 @@ const Login = () => {
                     <Heading fontSize={'2xl'}>Sign in to your account</Heading>
                     <FormControl id="email">
                         <FormLabel>Email address</FormLabel>
-                        <Input type="email" />
+                        <Input type="email" onChange={(e)=>setEmail(e.target.value)} />
                     </FormControl>
                     <FormControl id="password">
                         <FormLabel>Password</FormLabel>
-                        <Input type="password" />
+                        <Input type="password" onChange={(e)=>setPassword(e.target.value)} />
                     </FormControl>
                     <Stack spacing={6}>
                         <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}>
                             <Checkbox>Remember me</Checkbox>
                             <Text color={'blue.500'}>Forgot password?</Text>
                         </Stack>
-                        <Button colorScheme={'blue'} variant={'solid'}>Sign in</Button>
+                        <Button colorScheme={'blue'} variant={'solid'} onClick={()=>handleSignIn()}>Sign in</Button>
                     </Stack>
                 </Stack>
             </Flex>

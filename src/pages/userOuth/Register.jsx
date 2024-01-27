@@ -13,13 +13,31 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { Link, useNavigate } from 'react-router-dom'
+import { signupUser } from '../../features/authSlice'
+import { useDispatch } from 'react-redux'
 
 const Register = () => {
-    const [showPassword, setShowPassword] = useState(false)
+    const [showPassword, setShowPassword] = useState(false);
+    const [fname, setFname] = useState('');
+    const [lname, setLname] = useState('');
+    const [email, setEmail] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const handleSignUp = async()=>{
+        const signup = await dispatch(signupUser({name: fname+" "+lname, email, mobile, password}));
+        console.log("signup->", signup);
+        if(signup.type === 'signup/fulfilled'){
+            navigate('/')
+        }
+    }
+    
   return (
     <div>
         <Flex minH={'100vh'} align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'gray.800')}>
@@ -38,24 +56,28 @@ const Register = () => {
                             <Box>
                                 <FormControl id="firstName" isRequired>
                                 <FormLabel>First Name</FormLabel>
-                                <Input type="text" />
+                                <Input type="text" onChange={(e)=>setFname(e.target.value)} />
                                 </FormControl>
                             </Box>
                             <Box>
                                 <FormControl id="lastName">
                                 <FormLabel>Last Name</FormLabel>
-                                <Input type="text" />
+                                <Input type="text" onChange={(e)=>setLname(e.target.value)} />
                                 </FormControl>
                             </Box>
                         </HStack>
                         <FormControl id="email" isRequired>
                             <FormLabel>Email address</FormLabel>
-                            <Input type="email" />
+                            <Input type="email" onChange={(e)=>setEmail(e.target.value)}/>
+                        </FormControl>
+                        <FormControl id="mobile" isRequired>
+                            <FormLabel>Mobile Number</FormLabel>
+                            <Input type="number" onChange={(e)=>setMobile(e.target.value)}/>
                         </FormControl>
                         <FormControl id="password" isRequired>
                             <FormLabel>Password</FormLabel>
                             <InputGroup>
-                                <Input type={showPassword ? 'text' : 'password'} />
+                                <Input type={showPassword ? 'text' : 'password'} onChange={(e)=>setPassword(e.target.value)}/>
                                 <InputRightElement h={'full'}>
                                     <Button
                                         variant={'ghost'}
@@ -67,6 +89,7 @@ const Register = () => {
                         </FormControl>
                         <Stack spacing={10} pt={2}>
                             <Button
+                                onClick={handleSignUp}
                                 loadingText="Submitting"
                                 size="lg"
                                 bg={'blue.400'}
@@ -79,7 +102,7 @@ const Register = () => {
                         </Stack>
                         <Stack pt={6}>
                             <Text align={'center'}>
-                                Already a user? <Link color={'blue.400'}>Login</Link>
+                                Already a user? <Link to='/login' color={'blue.400'}>Login</Link>
                             </Text>
                         </Stack>
                     </Stack>

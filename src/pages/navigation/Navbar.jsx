@@ -19,9 +19,11 @@ import {
   Image,
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import Footer from '../../component/Footer'
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getUser, logoutUser } from '../../features/authSlice'
 
 
 const Links = [
@@ -60,6 +62,24 @@ const NavLink = (props) => {
 
 export default function WithAction() {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  dispatch(getUser());
+  const isLogin = useSelector(state=> state.auth.isLogin);
+  console.log("islogin-->", isLogin);
+
+//   const checkLogin = ()=>{
+//     if(!isLogin){
+//       navigate('/login');
+//     }
+//   }
+  const handleLogout = ()=>{
+    dispatch(logoutUser())
+    navigate('/login');
+  }
+  useEffect(() => {
+    // checkLogin();
+  }, [])
 
   return (
     <>
@@ -87,46 +107,51 @@ export default function WithAction() {
                 </HStack>
             </HStack>
             <Flex alignItems={'center'}>
-                <Stack direction='row' spacing={4} align='center'>
-                    <Button colorScheme='blue' variant='solid'>
-                        <Link to='/sign-up'>
-                        Sign Up </Link>
-                    </Button>
-                    <Button colorScheme='blue' variant='outline'>
-                    <Link to='login'>
-                        Log In
-                    </Link>
-                    </Button>
-                </Stack>
-                {/* <Button
-                variant={'solid'}
-                colorScheme={'teal'}
-                size={'sm'}
-                mr={4}
-                leftIcon={<AddIcon />}>
-                Action
-                </Button>
-                <Menu>
-                <MenuButton
-                    as={Button}
-                    rounded={'full'}
-                    variant={'link'}
-                    cursor={'pointer'}
-                    minW={0}>
-                    <Avatar
-                    size={'sm'}
-                    src={
-                        'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                    }
-                    />
-                </MenuButton>
-                <MenuList>
-                    <MenuItem>Link 1</MenuItem>
-                    <MenuItem>Link 2</MenuItem>
-                    <MenuDivider />
-                    <MenuItem>Link 3</MenuItem>
-                </MenuList>
-                </Menu> */}
+            {
+                isLogin ?
+                    <>
+                        <Button
+                        variant={'solid'}
+                        colorScheme={'teal'}
+                        size={'sm'}
+                        mr={4}
+                        leftIcon={<AddIcon />}>
+                        Action
+                        </Button>
+                        <Menu>
+                        <MenuButton
+                            as={Button}
+                            rounded={'full'}
+                            variant={'link'}
+                            cursor={'pointer'}
+                            minW={0}>
+                            <Avatar
+                            size={'sm'}
+                            src={
+                                'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                            }
+                            />
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem>Link 1</MenuItem>
+                            <MenuItem>Link 2</MenuItem>
+                            <MenuDivider />
+                            <MenuItem onClick={handleLogout}>LogOut</MenuItem>
+                        </MenuList>
+                        </Menu>
+                    </>  :
+                    <Stack direction='row' spacing={4} align='center'>
+                        <Button colorScheme='blue' variant='solid'>
+                            <Link to='/sign-up'>
+                            Sign Up </Link>
+                        </Button>
+                        <Button colorScheme='blue' variant='outline'>
+                        <Link to='login'>
+                            Log In
+                        </Link>
+                        </Button>
+                    </Stack>
+            }
             </Flex>
             </Flex>
 

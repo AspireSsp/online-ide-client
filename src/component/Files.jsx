@@ -1,48 +1,77 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Flex, Text } from '@chakra-ui/react'
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Flex, Link, Text } from '@chakra-ui/react'
 import React from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getFoldersList } from '../features/folder/folderSlice'
+import { CalendarIcon } from '@chakra-ui/icons'
+import { openFile } from '../features/file/fileSlice'
 
 const Files = () => {
+    const dispatch = useDispatch();
+    const folders = useSelector((state)=>state.folders.data);
+    console.log("my state- ", folders);
+    useEffect(() => {
+        dispatch(getFoldersList());
+    }, []);
+
+    const handleOpenFile = (file)=>{
+        dispatch(openFile(file));
+    }
+    
   return (
     <div>
         <Accordion defaultIndex={[0]} allowMultiple textColor={"#FFFFFF"}>
-            <AccordionItem borderTop={"0px"} >
-                <h2>
-                    <Flex>
-                        <AccordionButton w={10}>
-                            <AccordionIcon />
-                        </AccordionButton>
-                        <Box as="span" flex='1' textAlign='left' display={'flex'} alignItems={'center'} >
-                            JavaScript
-                        </Box>
-                    </Flex>
-                </h2>
-                {/* box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.1); */}
-                <AccordionPanel p={0} >
-                    <Text boxShadow={"0 2px 3px -1px rgba(0, 0, 0, 0.5)"}  ps={12} pb={1}>sanjay.py</Text>
-                    <Text boxShadow={"0 2px 3px -1px rgba(0, 0, 0, 0.5)"} ps={12} pb={1}>rahul.py</Text>
-                    <Text boxShadow={"0 2px 3px -1px rgba(0, 0, 0, 0.5)"} ps={12} pb={1}>madhav.py</Text>
-                    <Text boxShadow={"0 2px 3px -1px rgba(0, 0, 0, 0.5)"} ps={12} pb={1}>gotam.py</Text>
-                </AccordionPanel>
-            </AccordionItem>
+        {
+            folders?.map((folder)=>(
+                folder.fileName ? 
+                <AccordionItem borderTop={"0px"} key={folder._id} >
+                    <h2>
+                        <Flex>
+                            <AccordionButton w={10}>
+                                <CalendarIcon />
+                            </AccordionButton>
+                            <Box as="span" flex='1' textAlign='left' display={'flex'} alignItems={'center'} >
+                                <Link onClick={()=>{handleOpenFile(folder)}}>
+                                    {folder.fileName+"."+folder.contentType}
+                                </Link>
+                            </Box>
+                        </Flex>
+                    </h2>
+                   
+                </AccordionItem> : 
+                <AccordionItem borderTop={"0px"} key={folder._id} >
+                    <h2>
+                        <Flex>
+                            <AccordionButton w={10}>
+                                <AccordionIcon />
+                            </AccordionButton>
+                            <Box as="span" flex='1' textAlign='left' display={'flex'} alignItems={'center'} >
+                                {folder.folderName}
+                            </Box>
+                        </Flex>
+                    </h2>
+                    <AccordionPanel p={0} >
+                        {
+                            folder?.files?.map((file)=>(
+                                <Flex ps={3} key={file._id}>
+                                    <AccordionButton w={10}>
+                                        <CalendarIcon />
+                                    </AccordionButton>
+                                    <Box as="span" flex='1' textAlign='left' display={'flex'} alignItems={'center'}  >
+                                    <Link onClick={()=>{handleOpenFile(file)}}>
+                                        {file?.fileName+"."+file?.contentType}
+                                    </Link>
+                                    </Box>
+                                </Flex>
+                                
+                            ))
+                        }
+                    </AccordionPanel>
+                </AccordionItem>
+            ))
+        }
 
-            <AccordionItem>
-                <h2>
-                    <Flex>
-                        <AccordionButton w={10}>
-                            <AccordionIcon />
-                        </AccordionButton>
-                        <Box as="span" flex='1' textAlign='left' display={'flex'} alignItems={'center'}  >
-                            Server code
-                        </Box>
-                    </Flex>
-                </h2>
-                <AccordionPanel p={0} >
-                    <Text boxShadow={"0 2px 3px -1px rgba(0, 0, 0, 0.5)"}  ps={12} pb={1}>sanjay.py</Text>
-                    <Text boxShadow={"0 2px 3px -1px rgba(0, 0, 0, 0.5)"} ps={12} pb={1}>rahul.py</Text>
-                    <Text boxShadow={"0 2px 3px -1px rgba(0, 0, 0, 0.5)"} ps={12} pb={1}>madhav.py</Text>
-                    <Text boxShadow={"0 2px 3px -1px rgba(0, 0, 0, 0.5)"} ps={12} pb={1}>gotam.py</Text>
-                </AccordionPanel>
-            </AccordionItem>
+           
         </Accordion>
     </div>
   )

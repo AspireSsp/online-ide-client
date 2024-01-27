@@ -15,9 +15,12 @@ import {
   IconProps,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function CallToActionWithVideo() {
+    const navigate = useNavigate();
+    const isLogin = useSelector(state=> state.auth.isLogin)
   return (
     <Container maxW={'7xl'}>
       <Stack
@@ -55,6 +58,7 @@ export default function CallToActionWithVideo() {
           </Text>
           <Stack spacing={{ base: 4, sm: 6 }} direction={{ base: 'column', sm: 'row' }}>
             <Button
+              onClick={()=>{isLogin ? navigate('/code') : navigate('/login')}}
               rounded={'full'}
               size={'lg'}
               fontWeight={'normal'}
@@ -62,9 +66,7 @@ export default function CallToActionWithVideo() {
               colorScheme={'blue'}
               bg={'blue.400'}
               _hover={{ bg: 'blur.500' }}>
-              <Link to='/code'>
                 Get started
-              </Link>
             </Button>
             <Button
               rounded={'full'}
