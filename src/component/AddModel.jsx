@@ -1,5 +1,5 @@
 import { AddIcon } from '@chakra-ui/icons'
-import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Radio, RadioGroup, Select, Stack, Text, useDisclosure } from '@chakra-ui/react'
+import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Radio, RadioGroup, Select, Stack, Text, useDisclosure, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useState } from 'react'
 import ReactSelect from 'react-select'
@@ -19,11 +19,11 @@ const AddModel = () => {
     const [selectedFolder, setSelectedFolder] = useState({});
     const [folderName, setFolderName] = useState();
     const dispatch = useDispatch();
+    const toast = useToast();
 
 
     const getFolderDropdown = async()=>{
         const res = await get('folder/dropdown');
-        console.log(res);
         setOption(res.data.folders);
     }
 
@@ -38,21 +38,35 @@ const AddModel = () => {
             body.size = 28;
             body.data = '';
             body.folderId = selectedFolder.value;
-            console.log(body);
             const res = await dispatch(addFile(body))
-            console.log(res);
             if(res.type === 'addFile/fulfilled'){
                 dispatch(getFoldersList());
                 onClose();
+            }else if(res.type === 'addFile/rejected'){
+                toast({
+                    title: res.payload.response.data.error,
+                    description: res.payload.response.data.message,
+                    status: 'error',
+                    duration: 4000,
+                    isClosable: true,
+                    position: 'top'
+                  })
             }
         }else{
             body.folderName = folderName;
-            console.log(body);
             const res = await dispatch(addFolder(body))
-            console.log(res);
             if(res.type === 'addFolder/fulfilled'){
                 dispatch(getFoldersList());
                 onClose();
+            }else if(res.type === 'addFolder/rejected'){
+                toast({
+                    title: res.payload.response.data.error,
+                    description: res.payload.response.data.message,
+                    status: 'error',
+                    duration: 4000,
+                    isClosable: true,
+                    position: 'top'
+                  })
             }
         }
     }
@@ -83,7 +97,7 @@ const AddModel = () => {
     return (
       <>
            <Button pt={0} m={0} variant='gost' onClick={onOpen}>
-                    <AddIcon />
+                    <AddIcon color={'#ffffff'} />
             </Button>
         {/* <Button onClick={onOpen}>Trigger modal</Button> */}
   
@@ -111,6 +125,7 @@ const AddModel = () => {
                         <FormControl mt={2}>
                             <FormLabel>Select Programing Language</FormLabel>
                             <Select bg="#1F2937" color="#ffffff" value={contentType} onChange={(e)=>{setContentType(e.target.value)}} >
+                                <option style={{ color: '#ffffff', background:'#1F2937' }} value='xx'>Select One</option>
                                 <option style={{ color: '#ffffff', background:'#1F2937' }} value='c'>C</option>
                                 <option style={{ color: '#ffffff', background:'#1F2937' }} value='cpp'>CPP</option>
                                 <option style={{ color: '#ffffff', background:'#1F2937' }} value='js'>JAVASCRIPT</option>

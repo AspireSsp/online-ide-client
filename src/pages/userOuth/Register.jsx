@@ -13,6 +13,7 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
@@ -27,14 +28,33 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [mobile, setMobile] = useState('');
     const [password, setPassword] = useState('');
-
+    const toast = useToast();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleSignUp = async()=>{
-        const signup = await dispatch(signupUser({name: fname+" "+lname, email, mobile, password}));
-        console.log("signup->", signup);
-        if(signup.type === 'signup/fulfilled'){
-            navigate('/')
+        if(fname == ""){
+            toast({
+                title: "Error",
+                description: 'first name is required!',
+                status: 'error',
+                duration: 4000,
+                isClosable: true,
+                position: 'top'
+            })
+        }else{
+            const signup = await dispatch(signupUser({name: fname+" "+lname, email, mobile, password}));
+            if(signup.type === 'signup/fulfilled'){
+                navigate('/')
+            }else if(signup.type === 'signup/rejected'){
+                toast({
+                    title: signup.payload.response.data.error,
+                    description: signup.payload.response.data.message,
+                    status: 'error',
+                    duration: 4000,
+                    isClosable: true,
+                    position: 'top'
+                })
+            }
         }
     }
     

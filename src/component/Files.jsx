@@ -9,7 +9,6 @@ import { openFile } from '../features/file/fileSlice'
 const Files = () => {
     const dispatch = useDispatch();
     const folders = useSelector((state)=>state.folders.data);
-    console.log("my state- ", folders);
     useEffect(() => {
         dispatch(getFoldersList());
     }, []);

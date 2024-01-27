@@ -8,23 +8,21 @@ import { updateCode } from '../features/file/fileSlice';
 
 const CodeEditer = () => {
   const dispatch = useDispatch();
-  const currentFile = useSelector(state=> state.file.currentFile);
-  const code = "#include <stdio.h>\n\nint main() {\n  printf('Hello World');\n  return 0;\n}"
-  // const code = useSelector(state=> state.file?.currentFile?.data)
-  console.log('file code', code);
+  const currentCode = useSelector(state=> state.file.currentCode);
+
+  const handleOnChange = (value)=>{
+    dispatch(updateCode(value))
+  }
+  
   return (
     <div style={{height:'86vh'}}>
       <CodeMirror
-        value={currentFile?.data}
+        value={currentCode}
         height="100%"
         maxHeight="86vh"
         theme={vscodeDark}
         extensions={[javascript({ jsx: true })]}
-        onChange={(value, viewUpdate) => {
-          // currentFile.data = JSON.stringify(value, null, 2);
-          dispatch(updateCode(currentFile))
-          console.log('value:',currentFile.data);
-        }}
+        onChange={(value, viewUpdate) =>{handleOnChange(value)}}
       />
     </div>
   );

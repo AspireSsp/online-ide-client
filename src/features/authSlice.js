@@ -10,38 +10,32 @@ let initialState= {
     user: null,
 };
 
-export const loginUser = createAsyncThunk('login', async (requestData) => {
+export const loginUser = createAsyncThunk('login', async (requestData, { rejectWithValue }) => {
   try {
-    console.log(requestData);
     const res = await post('user/login', requestData);
-    console.log(res);
     localStorage.setItem('token', JSON.stringify(res.data.token));
     return res.data;
   } catch (error) {
-    throw error;
+    return rejectWithValue(error);
   }
 });
 
-export const signupUser = createAsyncThunk('signup', async (requestData) => {
+export const signupUser = createAsyncThunk('signup', async (requestData, { rejectWithValue }) => {
   try {
-    console.log(requestData);
     const res = await post('user/register', requestData);
-    console.log(res);
     localStorage.setItem('token', JSON.stringify(res.data.token));
     return res.data;
   } catch (error) {
-    throw error;
+    return rejectWithValue(error);
   }
 });
 
-export const getUser = createAsyncThunk('getUser', async (requestData) => {
+export const getUser = createAsyncThunk('getUser', async (requestData, { rejectWithValue }) => {
   try {
-    console.log(requestData);
     const res = await get('user/get');
-    console.log("get user res-> ",res);
     return res.data;
   } catch (error) {
-    throw error;
+    return rejectWithValue(error);
   }
 });
 
@@ -69,10 +63,9 @@ const authSlice = createSlice(
             builder.addCase(loginUser.rejected, (state, action)=>{
                 state.isLoading = false;
                 state.isError = true;
-                console.log("Error->",action.payload);
+                // console.log("Error->",action.payload);
             });
             builder.addCase(loginUser.fulfilled, (state, action)=>{
-                console.log("my payload-->",action.payload);
                 state.isLoading = false;
                 state.isLogin = true;
                 state.user = action.payload.user;
@@ -83,10 +76,9 @@ const authSlice = createSlice(
             builder.addCase(signupUser.rejected, (state, action)=>{
                 state.isLoading = false;
                 state.isError = true;
-                console.log("Error->",action.payload);
+                // console.log("Error->",action.payload);
             });
             builder.addCase(signupUser.fulfilled, (state, action)=>{
-                console.log("my payload-->",action.payload);
                 state.isLoading = false;
                 state.isLogin = true;
                 state.user = action.payload.user;
@@ -97,10 +89,9 @@ const authSlice = createSlice(
             builder.addCase(getUser.rejected, (state, action)=>{
                 state.isLoading = false;
                 state.isError = true;
-                console.log("Error->",action.payload);
+                // console.log("Error->",action.payload);
             });
             builder.addCase(getUser.fulfilled, (state, action)=>{
-                console.log("my payload-->",action.payload);
                 state.isLoading = false;
                 state.isLogin = true;
                 state.user = action.payload.user;

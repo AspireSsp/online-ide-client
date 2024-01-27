@@ -1,22 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { get, post } from '../../apis/api';
 
-export const getFoldersList = createAsyncThunk('getfolders', async (requestData) => {
+export const getFoldersList = createAsyncThunk('getfolders', async (requestData, { rejectWithValue }) => {
   try {
     const res = await get('folder/all/files');
-    console.log('all files-->', res.data.data);
     return res.data.data;
   } catch (error) {
-    throw error;
+    return rejectWithValue(error);
   }
 });
-export const addFolder = createAsyncThunk('addFolder', async (requestData) => {
+export const addFolder = createAsyncThunk('addFolder', async (requestData, { rejectWithValue }) => {
   try {
     const res = await post('folder/add', requestData);
-    console.log(res);
     return res.data.folder;
   } catch (error) {
-    throw error;
+    return rejectWithValue(error);
   }
 });
 

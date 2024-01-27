@@ -11,6 +11,7 @@ import {
   Input,
   Stack,
   Image,
+  useToast,
 } from '@chakra-ui/react'
 
 import React from 'react'
@@ -22,12 +23,22 @@ import { useNavigate } from 'react-router-dom'
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const toast = useToast()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const handleSignIn = async()=>{
         const login = await dispatch(loginUser({email, password}));
         if(login.type === 'login/fulfilled'){
             navigate('/')
+        }else if(login.type === 'login/rejected'){
+            toast({
+                title: login.payload.response.data.error,
+                description: login.payload.response.data.message,
+                status: 'error',
+                duration: 4000,
+                isClosable: true,
+                position: 'top'
+              })
         }
     }
 
