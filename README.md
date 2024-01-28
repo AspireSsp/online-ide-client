@@ -12,7 +12,21 @@ Here's what makes us stand out:
 `🚀 Fast and Efficient:` Our platform ensures speedy code execution, letting you focus on what matters – your code! \
 `<>👨‍💻 Happy Coding:` Embrace the joy of coding with our state-of-the-art features and user-friendly interface. Your coding journey just got a whole lot brighter! 👨‍💻</> \
 Join us on this exciting coding adventure and experience coding like never before! 🚀
-### `Depoloyed Links Coming Soon...`
+### `Depoloyed Links: `
+https://online-ide-z05y.onrender.com/ \
+### `How to use: `
+1. create your account by clicking on signup button. \
+2. Click on Editer in navigation bar. \
+3. Here you can create file and folders by clicking on (+)Plus icon. \
+4. Form open select what you want to create. File/ Folder \
+5. Folder: just write name and  click on save, your folder has created. \
+6. Create File inside of Folder: select file, select programming language, write name of file, select folder which inside you want to create a file. \
+7. Create File: do same but don't select folder.
+8. click on file you want to exicute. \
+9. write your code. \
+10. Run: click on RUN button to run the code. \
+11. Save: if you want to save  this file code permanently, else this code is prasent in this file for this session only. \
+12. Clear: if you want to clear all output then click on CLEAR button. \ 
 
 # Getting Started with Create React App
 
