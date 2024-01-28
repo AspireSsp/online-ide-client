@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Flex,
   Box,
@@ -57,7 +57,12 @@ const Register = () => {
             }
         }
     }
-    
+    useEffect(() => {
+        document.title = 'Sign-Up: Code Buddy';
+        return () => {
+          document.title = 'Code Buddy';
+        };
+    }, []); 
   return (
     <div>
         <Flex minH={'100vh'} align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'gray.800')}>

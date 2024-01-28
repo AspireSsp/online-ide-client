@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Files from '../../component/Files'
 import CodeEditer from '../../component/CodeEditer'
 import Output from '../../component/Output'
@@ -11,6 +11,12 @@ import AddModel from '../../component/AddModel'
 
 const Codeped = () => {
   const selectedFile = useSelector(state=>state.file.currentFile)
+  useEffect(() => {
+    document.title = 'Code Editer';
+    return () => {
+      document.title = 'Code Buddy';
+    };
+  }, []); 
   return (
     <div>
         <div style={{width : "100%", background:'#1F2937', display:'flex', height:'91vh' }}>

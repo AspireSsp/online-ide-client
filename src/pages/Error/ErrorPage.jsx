@@ -1,10 +1,17 @@
 'use client'
 
 import { Box, Heading, Text, Button } from '@chakra-ui/react'
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 export default function ErrorPage() {
     const navigate = useNavigate();
+    useEffect(() => {
+      document.title = 'Error: not found';
+      return () => {
+        document.title = 'Code Buddy';
+      };
+    }, []); 
   return (
     <Box textAlign="center" py={10} px={6}>
       <Heading

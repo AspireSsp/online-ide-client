@@ -11,7 +11,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import { IoAnalyticsSharp, IoLogoBitcoin, IoSearchSharp } from 'react-icons/io5'
-import { ReactElement } from 'react'
+import { ReactElement, useEffect } from 'react'
 
 
 
@@ -27,6 +27,12 @@ const Feature = ({ text, icon, iconBg }) => {
 }
 
 export default function About() {
+  useEffect(() => {
+    document.title = 'About Me';
+    return () => {
+      document.title = 'Code Buddy';
+    };
+  }, []); 
   return (
     <Container maxW={'5xl'} py={12}>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>

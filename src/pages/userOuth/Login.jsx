@@ -14,7 +14,7 @@ import {
   useToast,
 } from '@chakra-ui/react'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
@@ -41,7 +41,12 @@ const Login = () => {
               })
         }
     }
-
+    useEffect(() => {
+        document.title = 'About Me';
+        return () => {
+          document.title = 'Login: Code Buddy';
+        };
+      }, []); 
   return (
     <div>
         <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>

@@ -14,6 +14,7 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { useEffect } from 'react'
 import { FaMailBulk } from 'react-icons/fa'
 
 const testimonials = [
@@ -121,6 +122,12 @@ function TestimonialCard(props) {
 }
 
 export default function Contribute() {
+  useEffect(() => {
+    document.title = 'How to contribute in this project';
+    return () => {
+      document.title = 'Code Buddy';
+    };
+  }, []); 
   return (
     <Flex
       textAlign={'center'}
