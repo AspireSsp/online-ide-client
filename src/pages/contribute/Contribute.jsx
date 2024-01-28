@@ -180,7 +180,7 @@ export default function Contribute() {
           <Text color={'gray.500'}>
               Thank you for considering this opportunity, and we look forward to potentially working together!
           </Text>
-          <Stack
+          {/* <Stack
             direction={'column'}
             spacing={3}
             align={'center'}
@@ -218,7 +218,7 @@ export default function Contribute() {
                 just a mail away
               </Text>
             </Box>
-          </Stack>
+          </Stack> */}
         </Stack>
       </Container>
 

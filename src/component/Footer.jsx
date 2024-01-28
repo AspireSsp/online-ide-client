@@ -10,7 +10,7 @@ import {
   VisuallyHidden,
   Image,
 } from "@chakra-ui/react";
-import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaInstagram, FaTwitter, FaYoutube, FaGithub, FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Logo = (props) => {
@@ -81,21 +81,26 @@ export default function Footer() {
           justify={{ base: "center", md: "space-between" }}
           align={{ base: "center", md: "center" }}
         >
-          <Text>© 2022 Code-Budy. All rights reserved</Text>
+          <Text>© 2024 Code-Budy. All rights reserved</Text>
           <Stack direction={"row"} spacing={6}>
             <SocialButton label={"Twitter"}>
               <Link to="https://twitter.com/Aspire_ssp">
                 <FaTwitter />
               </Link>
             </SocialButton>
-            <SocialButton label={"YouTube"}>
-              <Link>
-                <FaYoutube to="https://www.linkedin.com/in/sanjay-prajapat-4187a0208/" />
+            <SocialButton label={"Github"}>
+              <Link to="https://github.com/AspireSsp">
+                <FaGithub />
+              </Link>
+            </SocialButton>
+            <SocialButton label={"LinkedIn"}>
+              <Link to="https://www.linkedin.com/in/sanjay-prajapat-4187a0208/" >
+                <FaLinkedin />
               </Link>
             </SocialButton>
             <SocialButton label={"Instagram"}>
-              <Link>
-                <FaInstagram to="https://www.instagram.com/aspire_ssp/" />
+              <Link to="https://www.instagram.com/aspire_ssp/">
+                <FaInstagram  />
               </Link>
             </SocialButton>
           </Stack>

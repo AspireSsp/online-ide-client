@@ -68,14 +68,14 @@ export default function CallToActionWithVideo() {
               _hover={{ bg: 'blur.500' }}>
                 Get started
             </Button>
-            <Button
+            {/* <Button
               rounded={'full'}
               size={'lg'}
               fontWeight={'normal'}
               px={6}
               leftIcon={<PlayIcon h={4} w={4} color={'gray.300'} />}>
               How It Works
-            </Button>
+            </Button> */}
           </Stack>
         </Stack>
         <Flex
