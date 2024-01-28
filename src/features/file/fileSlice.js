@@ -45,7 +45,7 @@ const fileSlice = createSlice(
           const index = state.activeFiles?.findIndex(ele=>{return ele._id === action.payload._id})
           state.activeFiles = index!==-1 ? state.activeFiles : [action.payload, ...state.activeFiles]
           state.currentFile = action.payload;
-          state.currentCode = action.payload.data;
+          state.currentCode = index !==-1 ? state.activeFiles[index]?.data : action.payload?.data;
           state.currentFileIndex = index !==-1 ? index : 0;  
       },
       closeFile: (state, action)=>{

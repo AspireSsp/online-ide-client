@@ -30,8 +30,8 @@ const TabFiles = () => {
             </Box>
             <Spacer />
             <Box pe={2}>
-                <Button height={8} mt={1} me={2} isDisabled={file.currentCode.length === 0 ? true : false} colorScheme='blue' onClick={handleSave}>SAVE</Button>
-                <Button height={8} mt={1} isDisabled={file.currentCode.length === 0 ? true : false} colorScheme='blue' onClick={handleRun}>RUN</Button>
+                <Button height={8} mt={1} me={2} isDisabled={file.currentCode?.length === 0 ? true : false} colorScheme='blue' onClick={handleSave}>SAVE</Button>
+                <Button height={8} mt={1} isDisabled={file.currentCode?.length === 0 ? true : false} colorScheme='blue' onClick={handleRun}>RUN</Button>
             </Box>
         </Flex>
     </div>
