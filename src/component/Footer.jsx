@@ -84,22 +84,22 @@ export default function Footer() {
           <Text>© 2024 Code-Budy. All rights reserved</Text>
           <Stack direction={"row"} spacing={6}>
             <SocialButton label={"Twitter"}>
-              <Link to="https://twitter.com/Aspire_ssp">
+              <Link target="_blank" to="https://twitter.com/Aspire_ssp">
                 <FaTwitter />
               </Link>
             </SocialButton>
             <SocialButton label={"Github"}>
-              <Link to="https://github.com/AspireSsp">
+              <Link target="_blank" to="https://github.com/AspireSsp">
                 <FaGithub />
               </Link>
             </SocialButton>
             <SocialButton label={"LinkedIn"}>
-              <Link to="https://www.linkedin.com/in/sanjay-prajapat-4187a0208/" >
+              <Link target="_blank" to="https://www.linkedin.com/in/sanjay-prajapat-4187a0208/" >
                 <FaLinkedin />
               </Link>
             </SocialButton>
             <SocialButton label={"Instagram"}>
-              <Link to="https://www.instagram.com/aspire_ssp/">
+              <Link target="_blank" to="https://www.instagram.com/aspire_ssp/">
                 <FaInstagram  />
               </Link>
             </SocialButton>

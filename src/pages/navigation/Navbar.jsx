@@ -26,7 +26,6 @@ const NavLink = (props) => {
     const { children } = props
     return (
         <Box
-            as="a"
             px={2}
             py={1}
             color={'#FFFFFF'}
@@ -130,8 +129,10 @@ export default function WithAction() {
                 {isOpen ? (
                 <Box pb={4} display={{ md: 'none' }}>
                     <Stack as={'nav'} spacing={4}>
-                        {Links.map((link) => (
-                            <NavLink key={link}>{link}</NavLink>
+                        {Links.map((link, index) => (
+                            <NavLink key={index}>
+                                <Link to={link.value}>{link.key}</Link>
+                            </NavLink>
                         ))}
                     </Stack>
                 </Box>
