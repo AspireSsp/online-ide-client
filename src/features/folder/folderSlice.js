@@ -17,6 +17,14 @@ export const addFolder = createAsyncThunk('addFolder', async (requestData, { rej
     return rejectWithValue(error);
   }
 });
+export const getFile = createAsyncThunk('getFile', async (requestData, { rejectWithValue }) => {
+  try {
+    const res = await get(`file/get/${requestData}`);
+    return res.data.file;
+  } catch (error) {
+    return rejectWithValue(error);
+  }
+});
 
 const folderSlice = createSlice(
     {
@@ -33,7 +41,7 @@ const folderSlice = createSlice(
             builder.addCase(getFoldersList.rejected, (state, action)=>{
                 state.isLoading = false;
                 state.isError = true;
-                console.log("Error->",action.payload);
+                // console.log("Error->",action.payload);
             })
             builder.addCase(getFoldersList.fulfilled, (state, action)=>{
                 state.isLoading = false;
@@ -44,6 +52,19 @@ const folderSlice = createSlice(
                 state.isLoading = false;
             });
 
+            // get file
+            builder.addCase(getFile.pending, (state, action)=>{
+              state.isLoading = true;
+            });
+            builder.addCase(getFile.rejected, (state, action)=>{
+              state.isLoading = false;
+              state.isError = true;
+              // console.log("Error->",action.payload);
+            });
+            builder.addCase(getFile.fulfilled, (state, action)=>{
+              state.isLoading = false;
+              state.data = [action.payload]
+            });
         }
     }
 )

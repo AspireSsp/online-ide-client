@@ -27,9 +27,9 @@ const AddModel = () => {
         setOption(res.data.folders);
     }
 
-    useEffect(() => {
-      getFolderDropdown();
-    }, [])
+    // useEffect(() => {
+    //   getFolderDropdown();
+    // }, [])
     const handleSave = async()=>{
         const body = {};
         if(radioValue === '1'){
@@ -96,7 +96,7 @@ const AddModel = () => {
 
     return (
       <>
-           <Button pt={0} m={0} variant='gost' onClick={onOpen}>
+           <Button pt={0} m={0} variant='gost' onClick={()=>{onOpen(); getFolderDropdown(); }}>
                     <AddIcon color={'#ffffff'} />
             </Button>
         {/* <Button onClick={onOpen}>Trigger modal</Button> */}
@@ -158,7 +158,7 @@ const AddModel = () => {
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
-      </Modal>
+        </Modal>
       </>
     )
 }

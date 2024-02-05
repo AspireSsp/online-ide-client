@@ -142,8 +142,8 @@ export default function WithAction() {
             <Box>
                 <Outlet /> 
                 {
-                    currentPath!=='/code' ? 
-                        <Footer /> : null
+                    (currentPath==='/code' || currentPath.includes('code/share')) ? 
+                        null : <Footer /> 
                 }
             </Box>
         </>

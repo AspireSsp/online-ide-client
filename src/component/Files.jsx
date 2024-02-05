@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getFoldersList } from '../features/folder/folderSlice'
 import { CalendarIcon } from '@chakra-ui/icons'
 import { openFile } from '../features/file/fileSlice'
+import FilepopOver from './FilepopOver'
 
 const Files = () => {
     const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const Files = () => {
     const handleOpenFile = (file)=>{
         dispatch(openFile(file));
     }
+
     
   return (
     <div>
@@ -26,14 +28,17 @@ const Files = () => {
                 <AccordionItem borderTop={"0px"} key={folder._id} >
                     <h2>
                         <Flex>
-                            <AccordionButton w={10}>
+                            <AccordionButton onClick={()=>{handleOpenFile(folder)}}>
                                 <CalendarIcon />
+                                <Box ms={2} as="span" flex='1' textAlign='left' display={'flex'} alignItems={'center'} >
+                                    {/* <Link >
+                                        {folder.fileName+"."+folder.contentType}
+                                    </Link> */}
+                                    <FilepopOver>
+                                        {folder}
+                                    </FilepopOver>
+                                </Box>
                             </AccordionButton>
-                            <Box as="span" flex='1' textAlign='left' display={'flex'} alignItems={'center'} >
-                                <Link onClick={()=>{handleOpenFile(folder)}}>
-                                    {folder.fileName+"."+folder.contentType}
-                                </Link>
-                            </Box>
                         </Flex>
                     </h2>
                    
@@ -41,26 +46,29 @@ const Files = () => {
                 <AccordionItem borderTop={"0px"} key={folder._id} >
                     <h2>
                         <Flex>
-                            <AccordionButton w={10}>
+                            <AccordionButton>
                                 <AccordionIcon />
-                            </AccordionButton>
                             <Box as="span" flex='1' textAlign='left' display={'flex'} alignItems={'center'} >
                                 {folder.folderName}
                             </Box>
+                            </AccordionButton>
                         </Flex>
                     </h2>
                     <AccordionPanel p={0} >
                         {
                             folder?.files?.map((file)=>(
                                 <Flex ps={3} key={file._id}>
-                                    <AccordionButton w={10}>
+                                    <AccordionButton w={10} onClick={()=>{handleOpenFile(file)}} onContextMenu={(e)=>{e.preventDefault(); }}>
                                         <CalendarIcon />
+                                        <Box ms={2} as="span" flex='1' textAlign='left' display={'flex'} alignItems={'center'}  >
+                                        {/* <Link onClick={()=>{handleOpenFile(file)}} onContextMenu={(e)=>{e.preventDefault(); }} > */}
+                                            <FilepopOver>
+                                                {file}
+                                            </FilepopOver>
+                                            {/* {file?.fileName+"."+file?.contentType}  */}
+                                        {/* </Link> */}
+                                        </Box>
                                     </AccordionButton>
-                                    <Box as="span" flex='1' textAlign='left' display={'flex'} alignItems={'center'}  >
-                                    <Link onClick={()=>{handleOpenFile(file)}}>
-                                        {file?.fileName+"."+file?.contentType}
-                                    </Link>
-                                    </Box>
                                 </Flex>
                                 
                             ))

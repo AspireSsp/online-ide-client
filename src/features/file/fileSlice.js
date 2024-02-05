@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { patch, post } from '../../apis/api';
+import { deletethis, get, patch, post } from '../../apis/api';
 
 
 export const addFile = createAsyncThunk('addFile', async (requestData, { rejectWithValue }) => {
@@ -20,12 +20,21 @@ export const compileFile = createAsyncThunk('compileFile', async (requestData, {
 });
 export const saveFile = createAsyncThunk('saveFile', async (requestData, { rejectWithValue }) => {
   try {
-    const res = await patch(`file/update/${requestData._id}`, {data: requestData.code});
+    const res = await patch(`file/update/${requestData._id}`, requestData);
     return res.data.updateFile;
   } catch (error) {
     return rejectWithValue(error);
   }
 });
+export const deleteFile = createAsyncThunk('deleteFile', async (requestData, { rejectWithValue }) => {
+  try {
+    const res = await deletethis(`file/delete/${requestData._id}`);
+    return res.data.deleteFile;
+  } catch (error) {
+    return rejectWithValue(error);
+  }
+});
+
 
 const fileSlice = createSlice(
   {
@@ -109,6 +118,24 @@ const fileSlice = createSlice(
       builder.addCase(saveFile.fulfilled, (state, action)=>{
         state.isLoading = false;
       });
+      // delete file
+      builder.addCase(deleteFile.pending, (state, action)=>{
+          state.isLoading = true;
+        });
+        builder.addCase(deleteFile.rejected, (state, action)=>{
+          state.isLoading = false;
+          state.isError = true;
+          // console.log("Error->",action.payload);
+        });
+        builder.addCase(deleteFile.fulfilled, (state, action)=>{
+          console.log(action.payload);
+          state.isLoading = false;
+          state.activeFiles = state?.activeFiles?.filter((file)=>{ return file._id !== action.payload._id});
+          state.currentFile = state?.activeFiles[0];
+          state.currentCode = state?.activeFiles[0]?.data;
+          state.currentFileIndex = 0
+      });
+      
 
     }
   }

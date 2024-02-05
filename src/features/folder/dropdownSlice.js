@@ -5,7 +5,6 @@ import { get } from '../../apis/api';
 export const getFolderDropdown = createAsyncThunk('folderDropdown', async (requestData) => {
   try {
     const res = await get('folder/dropdown');
-    console.log(res);
     return res.data.folders;
   } catch (error) {
     throw error;
