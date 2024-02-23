@@ -63,6 +63,12 @@ const fileSlice = createSlice(
           state.currentCode = state?.activeFiles[0]?.data;
           state.currentFileIndex = 0
       },
+      closeAllTabs: (state, action)=>{
+          state.activeFiles = [];
+          state.currentFile = null;
+          state.currentCode = "";
+          state.currentFileIndex = null
+      },
       updateCode: (state, action)=>{
         state.currentCode = action.payload;
         let files = [...state.activeFiles];
@@ -142,4 +148,4 @@ const fileSlice = createSlice(
 )
 
 export default fileSlice.reducer;
-export const { openFile, closeFile, updateCode, switchFile, clearOutput } = fileSlice.actions
+export const { openFile, closeFile, closeAllTabs, updateCode, switchFile, clearOutput } = fileSlice.actions

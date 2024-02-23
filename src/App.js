@@ -14,7 +14,7 @@ function App() {
   
   
   return (
-    <div className="App">
+    <div className="App" onContextMenu={(event)=>{event.preventDefault();}}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navbar />}>

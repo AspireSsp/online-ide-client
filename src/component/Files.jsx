@@ -14,9 +14,6 @@ const Files = () => {
         dispatch(getFoldersList());
     }, []);
 
-    const handleOpenFile = (file)=>{
-        dispatch(openFile(file));
-    }
 
     
   return (
@@ -28,7 +25,7 @@ const Files = () => {
                 <AccordionItem borderTop={"0px"} key={folder._id} >
                     <h2>
                         <Flex>
-                            <AccordionButton onClick={()=>{handleOpenFile(folder)}}>
+                            <AccordionButton >
                                 <CalendarIcon />
                                 <Box ms={2} as="span" flex='1' textAlign='left' display={'flex'} alignItems={'center'} >
                                     {/* <Link >
@@ -58,7 +55,7 @@ const Files = () => {
                         {
                             folder?.files?.map((file)=>(
                                 <Flex ps={3} key={file._id}>
-                                    <AccordionButton w={10} onClick={()=>{handleOpenFile(file)}} onContextMenu={(e)=>{e.preventDefault(); }}>
+                                    <AccordionButton w={10}  >
                                         <CalendarIcon />
                                         <Box ms={2} as="span" flex='1' textAlign='left' display={'flex'} alignItems={'center'}  >
                                         {/* <Link onClick={()=>{handleOpenFile(file)}} onContextMenu={(e)=>{e.preventDefault(); }} > */}

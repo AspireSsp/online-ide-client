@@ -104,8 +104,8 @@ export default function WithAction() {
                                         />
                                     </MenuButton>
                                     <MenuList>
-                                        <MenuItem>Link 1</MenuItem>
-                                        <MenuItem>Link 2</MenuItem>
+                                        <MenuItem>Profile</MenuItem>
+                                        <MenuItem>Settings</MenuItem>
                                         <MenuDivider />
                                         <MenuItem onClick={handleLogout}>LogOut</MenuItem>
                                     </MenuList>

@@ -1,15 +1,20 @@
 import { AddIcon, CopyIcon, DeleteIcon, EditIcon, ExternalLinkIcon, RepeatIcon } from '@chakra-ui/icons';
 import { Button, Flex, List, ListIcon, ListItem, MenuList, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Spacer, Text, useColorModeValue, useToast } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { IoShareSocialOutline, IoTerminalOutline } from "react-icons/io5";
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteFile } from '../features/file/fileSlice';
-import { getFoldersList } from '../features/folder/folderSlice';
-import InputModel from './InputModel';
-import DeleteAlert from './DeleteAlert';
-import { copy } from '../utills/copyText';
-import { baseUrl, baseUrlClient } from '../apis/api';
+import { IoMdExit } from "react-icons/io";
+import NewTab from './popOverMenu/NewTab';
+import OpenFileInTab from './popOverMenu/OpenFileInTab';
+import AddFavorite from './popOverMenu/AddFavorite';
+import CloseFile from './popOverMenu/CloseFile';
+import CloseAllFiles from './popOverMenu/CloseAllFiles';
+import Find from './popOverMenu/Find';
+import ShareFile from './popOverMenu/ShareFile';
+import CopyFile from './popOverMenu/CopyFile';
+import RenameFile from './popOverMenu/RenameFile';
+import DeleteFile from './popOverMenu/DeleteFile';
+import { openFile } from '../features/file/fileSlice';
 
 const FilepopOver = ({children}) => {
 
@@ -26,97 +31,59 @@ const FilepopOver = ({children}) => {
         event.preventDefault();
     };
 
+    const handleOpenFile = (file)=>{
+        dispatch(openFile(file));
+    }
+
     const handleClosePopover = () => {
         setPopoverOpen(false);
     };
-
-    const shareCode = (file)=>{
-        const url = `${baseUrlClient}code/share/${file._id}`;
-        copy(url);
-        toast({
-            title: 'code link copied to clipboard',
-            description: url,
-            status: 'info',
-            duration: 9000,
-            isClosable: true,
-          })
-    }
 
     return (
         <div onContextMenu={handleContextMenu}>
         <Popover isOpen={isPopoverOpen} onClose={handleClosePopover} placement='right' position={popoverPosition}>
             <PopoverTrigger>
-            <Link>
+            <Link onClick={()=>{handleOpenFile(children)}}>
                 {children.fileName+"."+children.contentType}
             </Link>
             </PopoverTrigger>
             <PopoverContent textColor={"#FFFFFF"} background={'#1F2937'} w={56} border={'1px solid gray'}>
             <PopoverArrow />
-            <List>
-                    <ListItem
-                        p={2} 
-                        borderRadius={8}
-                        _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
-                    >
+                <List>
+                    <ListItem>
+                        <NewTab onClose={handleClosePopover} />
+                    </ListItem>
+                    <ListItem>
+                        <OpenFileInTab file={children} onClose={handleClosePopover}/>
+                    </ListItem>
+                    <ListItem>
+                        <AddFavorite file={children} />
+                    </ListItem>
+                    <ListItem>
+                        <CloseFile file={children} onClose={handleClosePopover} />
+                    </ListItem>
+                    <ListItem>
+                        <CloseAllFiles onClose={handleClosePopover} />
+                    </ListItem>
+                    <ListItem>
+                        <Find file={children} />
+                    </ListItem>
+                    <ListItem>
+                        <ShareFile file={children} />
+                    </ListItem>
+                    <ListItem>   
+                        <CopyFile file={children} />
+                    </ListItem>
+                    <ListItem>
+                        <RenameFile file={children} />
+                    </ListItem>
+                    <ListItem> 
+                        <DeleteFile file={children} />
+                    </ListItem>
+                    <ListItem p={2}  _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}} borderRadius={8} onClick={(e)=>{e.preventDefault(); handleClosePopover();}} >   
                         <Flex alignItems={'center'}>
-                            <ListIcon as={AddIcon} />
-                            New Tab
-                            <Spacer />
-                            <Text fontSize={12} fontWeight={'300'} >Ctrl+N</Text>
-                        </Flex>
-                    </ListItem>
-                    <ListItem
-                        p={2} 
-                        _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
-                    >   
-                        <Flex alignItems={'center'}>
-                            <ListIcon as={IoTerminalOutline} />
-                            Run File
-                            <Spacer />
-                            <Text fontSize={12} fontWeight={'300'} >Ctrl+R</Text>
-                        </Flex>
-                    </ListItem>
-                    <ListItem
-                        onClick={()=>{shareCode(children)}}
-                        p={2} 
-                        _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
-                    >
-                        <ListIcon as={IoShareSocialOutline} />
-                        Share File
-                    </ListItem>
-                    <ListItem
-                        p={2} 
-                        _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
-                    >   
-                        <Flex alignItems={'center'} onClick={()=>{copy(children.data)}}>
-                            <ListIcon as={CopyIcon} />
-                            Copy
-                            <Spacer />
-                            <Text fontSize={12} fontWeight={'300'} >Ctrl+C</Text>
-                        </Flex>
-                    </ListItem>
-                    <ListItem
-                        p={2} 
-                        _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
-                    >
-                        <Flex alignItems={'center'}>
-                            <ListIcon as={EditIcon} />
-                            <InputModel>{children}</InputModel>
-                            <Spacer />
-                            <Text fontSize={12} fontWeight={'300'} >F2</Text>
-                        </Flex>
-
-                    </ListItem>
-                    <ListItem
-                        p={2} 
-                        _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
-                        borderRadius={8}
-                    >   
-                        <Flex alignItems={'center'}>
-                            <ListIcon as={DeleteIcon} />
-                                <DeleteAlert>{children}</DeleteAlert>
-                            <Spacer />
-                            <Text fontSize={12} fontWeight={'300'} >Delete</Text>
+                            <ListIcon as={IoMdExit} />
+                            Exit
                         </Flex>
                     </ListItem>
                 </List>
@@ -127,3 +94,127 @@ const FilepopOver = ({children}) => {
 };
 
 export default FilepopOver;
+
+
+{/* <List>
+<ListItem
+    p={2} 
+    borderRadius={8}
+    _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
+>
+    <Flex alignItems={'center'}>
+        <ListIcon as={AddIcon} />
+        New Tab
+        <Spacer />
+        <Text fontSize={12} fontWeight={'300'} >Ctrl+N</Text>
+    </Flex>
+</ListItem>
+<ListItem
+    p={2} 
+    _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
+>   
+    <Flex alignItems={'center'}>
+        <ListIcon as={BsFileEarmarkText} />
+        Open File
+        <Spacer />
+        <Text fontSize={12} fontWeight={'300'} ></Text>
+    </Flex>
+</ListItem>
+<ListItem
+    p={2} 
+    _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
+>   
+    <Flex alignItems={'center'}>
+        <ListIcon as={FiStar} />
+        Add Favorite
+        <Spacer />
+        <Text fontSize={12} fontWeight={'300'} ></Text>
+    </Flex>
+</ListItem>
+<ListItem
+    p={2} 
+    _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
+>   
+    <Flex alignItems={'center'}>
+        <ListIcon as={RiFileCloseLine} />
+        Close File
+        <Spacer />
+        <Text fontSize={12} fontWeight={'300'} ></Text>
+    </Flex>
+</ListItem>
+<ListItem
+    p={2} 
+    _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
+>   
+    <Flex alignItems={'center'}>
+        <ListIcon as={FaRegWindowClose} />
+        Close All File
+        <Spacer />
+        <Text fontSize={12} fontWeight={'300'} ></Text>
+    </Flex>
+</ListItem>
+<ListItem
+    p={2} 
+    _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
+>   
+    <Flex alignItems={'center'}>
+        <ListIcon as={IoSearchSharp} />
+        Find
+        <Spacer />
+        <Text fontSize={12} fontWeight={'300'} >Ctrl+F</Text>
+    </Flex>
+</ListItem>
+<ListItem
+    onClick={()=>{shareCode(children)}}
+    p={2} 
+    _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
+>
+    <ListIcon as={IoShareSocialOutline} />
+    Share File
+</ListItem>
+<ListItem
+    p={2} 
+    _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
+>   
+    <Flex alignItems={'center'} onClick={()=>{copy(children.data)}}>
+        <ListIcon as={CopyIcon} />
+        Copy
+        <Spacer />
+        <Text fontSize={12} fontWeight={'300'} >Ctrl+C</Text>
+    </Flex>
+</ListItem>
+<ListItem
+    p={2} 
+    _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
+>
+    <Flex alignItems={'center'}>
+        <ListIcon as={EditIcon} />
+        <InputModel>{children}</InputModel>
+        <Spacer />
+        <Text fontSize={12} fontWeight={'300'} >F2</Text>
+    </Flex>
+
+</ListItem>
+<ListItem
+    p={2} 
+    _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
+>   
+    <Flex alignItems={'center'}>
+        <ListIcon as={DeleteIcon} />
+            <DeleteAlert>{children}</DeleteAlert>
+        <Spacer />
+        <Text fontSize={12} fontWeight={'300'} >Delete</Text>
+    </Flex>
+</ListItem>
+<ListItem
+    p={2} 
+    _hover={{textDecoration: 'none',bg: useColorModeValue('#444c57', '#FFFFFF')}}
+    borderRadius={8}
+    onClick={(e)=>{e.preventDefault(); handleClosePopover();}}
+>   
+    <Flex alignItems={'center'}>
+        <ListIcon as={AddIcon} />
+        Exit
+    </Flex>
+</ListItem>
+</List> */}

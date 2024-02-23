@@ -81,7 +81,7 @@ export default function Footer() {
           justify={{ base: "center", md: "space-between" }}
           align={{ base: "center", md: "center" }}
         >
-          <Text>© 2024 Code-Budy. All rights reserved</Text>
+          <Text>© 2024 ByteFortify. All rights reserved</Text>
           <Stack direction={"row"} spacing={6}>
             <SocialButton label={"Twitter"}>
               <Link target="_blank" to="https://twitter.com/Aspire_ssp">

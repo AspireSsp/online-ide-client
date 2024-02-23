@@ -51,7 +51,7 @@ export default function About() {
           <Heading>Hello</Heading>
           <Heading>I am <span style={{color:'#3182ce'}}>SANJAY PRAJAPAT</span></Heading>
           <Text color={'gray.500'} fontSize={'lg'}>
-          Experienced Full Stack Developer specializing in building robust and scalable web and mobile applications. With a passion for problem-solving and a strong background in MERN stack (MongoDB, Express.js, React.js, Node.js), React Native, Flutter, AWS, and Firebase, I strive to create innovative solutions that meet the needs of clients and users.
+          Experienced Full Stack Developer specializing in building robust and scalable web and mobile applications. With a passion for problem-solving and a strong background in JavaScript, MERN stack (MongoDB, Express.js, React.js, Node.js), Next.js, React Native, Flutter, AWS, and Firebase, I strive to create innovative solutions that meet the needs of clients and users.
           </Text>
           <Stack
             spacing={4}

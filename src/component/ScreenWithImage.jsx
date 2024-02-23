@@ -54,7 +54,8 @@ export default function CallToActionWithVideo() {
             </Text>
           </Heading>
           <Text color={'gray.500'}>
-          Code-Buddy: Your all-in-one coding hub. Write, run, and test code in a simple editor, post coding challenges, and organize contests—all in a single, streamlined platform. All that is free!
+          {/* ByteFortify: Your all-in-one coding hub. Write, run, and test code in a simple editor, post coding challenges, and organize contests—all in a single, streamlined platform. All that is free! */}
+          ByteFortify is a cutting-edge web application designed for seamless code compilation, execution, and collaboration. Elevate your coding experience with real-time output viewing, hassle-free code sharing via generated links, and the flexibility to create, organize, and manage your projects with ease. Dive into a collaborative coding environment where you can test and refine your code effortlessly. Experience the next level of efficiency with ByteFortify, your go-to platform for secure, dynamic, and innovative coding practices.
           </Text>
           <Stack spacing={{ base: 4, sm: 6 }} direction={{ base: 'column', sm: 'row' }}>
             <Button
